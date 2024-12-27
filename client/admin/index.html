@@ -7,6 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    <button onclick="Buttom_admin_bw()"> Назад</button>
+    <h1>Введите IP</h1>
+    <input type="text" id="ip" placeholder="Ввод">
+
+    <h1>Логин</h1>
+    <input type="text" id="login" placeholder="Ввод">
+
+    <h1>Пароль</h1>
+    <input type="password" id="password" placeholder="Ввод">
+
+    <button onclick="validateLogin()">ОК</button>
+    <button onclick="Buttom_admin_bw()">Назад</button>
+
+    <p id="error-message" style="color: red; display: none;">Неправильный логин или пароль!</p>
 </body>
 </html>
