@@ -1,17 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Админ Панель</title>
+    <style>
+        body {
+            background-color: rgb(255, 255, 255);
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h3 {
+            margin: 10px 0;
+        }
+        #user-list {
+            margin-top: 10px;
+            border: 1px solid black;
+            padding: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        #user-list li {
+            cursor: pointer;
+            margin: 5px 0;
+        }
+        #user-list li:hover {
+            color: blue;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .container div {
+            flex: 1;
+            text-align: center;
+        }
+        .footer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
 </head>
 <body>
-    <h1>Пользователи</h1>
-    <h1>Кол во человек</h1>
-    <h3>Демо</h3>
-    <h3>Настройки</h3>
-    <h3>Начать</h3>
-    <h3>Времени осталось</h3>
+    <div class="header">
+        <h1>Пользователи</h1>
+        <div>
+            <h3>Добавить человека:</h3>
+            <input type="text" id="user-name" placeholder="Введите имя">
+            <button onclick="addUser()">Добавить</button>
+        </div>
+    </div>
+
+    <ul id="user-list"></ul>
+
+    <div class="footer">
+        <div>
+            <h3>Кол-во человек:</h3>
+            <p id="user-count">0</p>
+        </div>
+        <div>
+            <h3>Времени осталось:</h3>
+            <p id="time-left">00:00:00</p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <button onclick="startTest()">Начать</button>
+        <button onclick="openSettings()">Настройки</button>
+    </div>
 </body>
 </html>
