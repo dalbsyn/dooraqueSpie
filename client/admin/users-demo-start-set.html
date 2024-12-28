@@ -6,70 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админ Панель</title>
     <style>
-        body {
-            background-color: rgb(255, 255, 255);
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1, h3 {
-            margin: 10px 0;
-        }
         #user-list {
             margin-top: 10px;
-            border: 1px solid black;
-            padding: 10px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        #user-list li {
-            cursor: pointer;
-            margin: 5px 0;
+            border: 1px solid rgb(0, 0, 0);  /* обводка 1px цвет черный */
+            padding: 15px; /*начальная высота строки*/ 
+            max-height: 100px; /* как будет текста выше чем 100 будет прокрутка */
+            overflow-y: auto; /* прокрутка, превышает размер max-height и прокрута будет */
         }
         #user-list li:hover {
-            color: blue;
-        }
-        .container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        .container div {
-            flex: 1;
-            text-align: center;
+            color: blue; /* при добавлении пользоавтеля  и наведении он горит синим, видно что она кликабельная */
         }
         .footer {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
+            display: flex; /* Нужен чтобы кол во человеки вермени было в строчку*/
+            align-items: center; /* все было посередине весь текст не было такого что что то выше что то ниже */
+            gap: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="header">
+    <div class="footer">
         <h1>Пользователи</h1>
-        <div>
             <h3>Добавить человека:</h3>
             <input type="text" id="user-name" placeholder="Введите имя">
             <button onclick="addUser()">Добавить</button>
-        </div>
     </div>
 
-    <ul id="user-list"></ul>
+    <ol id="user-list"></ol>
 
     <div class="footer">
-        <div>
             <h3>Кол-во человек:</h3>
             <p id="user-count">0</p>
-        </div>
-        <div>
             <h3>Времени осталось:</h3>
             <p id="time-left">00:00:00</p>
-        </div>
     </div>
     
-    <div class="footer">
-        <button onclick="startTest()">Начать</button>
-        <button onclick="openSettings()">Настройки</button>
-    </div>
+    <button onclick="">Начать</button>
+    <button onclick="">Настройки</button>
 </body>
 </html>

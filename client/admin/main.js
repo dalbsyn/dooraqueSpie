@@ -1,3 +1,4 @@
+const { desktopCapturer } = require('electron');
 const correctLogin = "a";
 const correctPassword = "a";
 
@@ -11,7 +12,6 @@ function validateLogin() {
     const login = document.getElementById("login").value;
     const password = document.getElementById("password").value;
     const errorMessage = document.getElementById("error-message");
-
     if (login === correctLogin && password === correctPassword) {
         window.location.href = 'users-demo-start-set.html';
     } else {
@@ -29,16 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addUser = function () {
         const userNameInput = document.getElementById("user-name");
         const userName = userNameInput.value.trim();
-
         if (userName) {
             const listItem = document.createElement("li");
             listItem.textContent = userName;
-            listItem.onclick = () => startScreenShare(userName);
+            listItem.onclick = () => startScreenShare(userName, listItem);
             userList.appendChild(listItem);
-
             userCount++;
             userCountElement.textContent = userCount;
-
             userNameInput.value = '';
         } else {
             alert("Введите имя пользователя!");
@@ -46,31 +43,25 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Начало демонстрации экрана
-    async function startScreenShare(userName) {
+    const { desktopCapturer } = require('electron');
+
+    async function startScreenShare() {
         try {
-            const stream = await navigator.mediaDevices.getDisplayMedia({
-                video: true
+            const sources = await desktopCapturer.getSources({ types: ['screen'] });
+        
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: {
+                    mandatory: {
+                        chromeMediaSource: 'desktop',
+                        chromeMediaSourceId: sources[0].id
+                    }
+                }
             });
 
-            alert(`Демонстрация экрана началась для пользователя: ${userName}`);
-            
-            // Остановка демонстрации при завершении
-            stream.getVideoTracks()[0].onended = () => {
-                alert("Демонстрация экрана завершена.");
-            };
+            console.log('Демонстрация экрана началась!');
         } catch (err) {
-            console.error("Ошибка при попытке начать демонстрацию экрана:", err);
-            alert("Не удалось начать демонстрацию экрана. Разрешение отклонено или произошла ошибка.");
+            console.error('Ошибка при демонстрации экрана:', err);
+            alert('Не удалось начать демонстрацию экрана. Проверьте настройки и разрешения.');
         }
     }
-
-    // Начать тест
-    window.startTest = function () {
-        alert("Тест начат!");
-    };
-
-    // Открыть настройки
-    window.openSettings = function () {
-        alert("Открыть настройки");
-    };
 });
