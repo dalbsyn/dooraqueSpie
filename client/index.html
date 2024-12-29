@@ -5,9 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .Knopca{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+        .Knopca button {
+            font-size: 24px; /* Увеличивает размер шрифта кнопок */
+            padding: 20px 40px; /* Увеличивает размер кнопок за счет внутренних отступов */
+            margin: 0 10px; /* Добавляет пространство между кнопками */
+            border: 2px solid #000;
+}
+    </style>
 </head>
 <body>
-    <button onclick="Button_admin()">Админ</button>
-    <button onclick="Buttom_user()">Пользователь</button>
+    <div class="Knopca">
+        <button onclick="Button_admin()">Админ</button>
+        <button onclick="Buttom_user()">Пользователь</button>
+    </div>
+    
 </body>
 </html>
