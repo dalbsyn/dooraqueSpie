@@ -1,4 +1,3 @@
-const { desktopCapturer } = require('electron');
 const correctLogin = "a";
 const correctPassword = "a";
 
@@ -20,48 +19,55 @@ function validateLogin() {
 }
 
 // Управление пользователями
-document.addEventListener("DOMContentLoaded", () => {
-    const userList = document.getElementById("user-list");
-    const userCountElement = document.getElementById("user-count");
-    let userCount = 0;
+const userList = document.getElementById("userlist");
+const userCountElement = document.getElementById("user-count");
+let userCount = 0;
 
-    // Добавление пользователя в список
-    window.addUser = function () {
-        const userNameInput = document.getElementById("user-name");
-        const userName = userNameInput.value.trim();
-        if (userName) {
-            const listItem = document.createElement("li");
-            listItem.textContent = userName;
-            listItem.onclick = () => startScreenShare(userName, listItem);
-            userList.appendChild(listItem);
-            userCount++;
-            userCountElement.textContent = userCount;
-            userNameInput.value = '';
-        } else {
-            alert("Введите имя пользователя!");
-        }
-    };
+function addUser() {
+    const userNameInput = document.getElementById("user-name");
+    const userName = userNameInput.value.trim();
+    if (userName) {
+        // Создаем элемент списка
+        const listItem = document.createElement("li");
 
-    // Начало демонстрации экрана
-    const { desktopCapturer } = require('electron');
+        // Создаем кнопку
+        const button = document.createElement("button");
+        button.textContent = userName;
+        button.classList.add("user-button");
 
-    async function startScreenShare() {
-        try {
-            const sources = await desktopCapturer.getSources({ types: ['screen'] });
-        
-            const stream = await navigator.mediaDevices.getUserMedia({
+        // Добавляем кнопку в список
+        listItem.appendChild(button);
+
+        // Добавляем элемент в userlist
+        userList.appendChild(listItem);
+
+        // Очищаем поле ввода
+        userNameInput.value = '';
+
+        // Увеличиваем счетчик
+        userCount++;
+
+        // Обновляем отображение количества пользователей
+        userCountElement.textContent = userCount;
+
+        // Добавляем обработчик для запуска демонстрации экрана при клике на кнопку
+        button.addEventListener('click', () => {
+            const video = document.querySelector('video');
+            navigator.mediaDevices.getDisplayMedia({
+                audio: true,
                 video: {
-                    mandatory: {
-                        chromeMediaSource: 'desktop',
-                        chromeMediaSourceId: sources[0].id
-                    }
+                    width: 320,
+                    height: 240,
+                    frameRate: 30
                 }
-            });
-
-            console.log('Демонстрация экрана началась!');
-        } catch (err) {
-            console.error('Ошибка при демонстрации экрана:', err);
-            alert('Не удалось начать демонстрацию экрана. Проверьте настройки и разрешения.');
+            }).then(stream => {
+                video.srcObject = stream;
+                video.onloadedmetadata = (e) => video.play();
+            }).catch(e => console.log(e));
+        });
+    } else {
+        if (errorMessage) {
+            errorMessage.style.display = 'block';
         }
     }
-});
+}
