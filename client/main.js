@@ -10,7 +10,7 @@ function createWindow(){
       nodeIntegration: true,
     }
   });
-  mainWindow.loadFile('index.html');
+  mainWindow.loadFile('index.html'); 
 }
 
 app.whenReady().then(() => {

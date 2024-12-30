@@ -5,6 +5,12 @@ const correctPassword = "a";
 function Buttom_admin_bw() {
     window.location.href = '../index.html';
 }
+function vshod(){
+    window.location.href='vshod.html';
+}
+function nazad(){
+    window.location.href='../index.html';
+}
 
 // Проверка логина и пароля
 function validateLogin() {
@@ -54,7 +60,7 @@ function addUser() {
         button.addEventListener('click', () => {
             const video = document.querySelector('video');
             navigator.mediaDevices.getDisplayMedia({
-                audio: true,
+                audio: false,
                 video: {
                     width: 320,
                     height: 240,

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="main.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Логин</h1>
+    <input type="text" id="login" placeholder="Ввод">
+
+    <h1>Пароль</h1>
+    <input type="password" id="password" placeholder="Ввод">
+
+    <button onclick="validateLogin()">ОК</button><br> <!-- перенос строки, чтобы css сюда не впутывать -->
+    <br>
+    <button onclick="Buttom_admin_bw()">Назад</button>
+
+    <p id="error-message" style="color: red; display: none;">Неправильный логин или пароль!</p>
+</body>
+</html>

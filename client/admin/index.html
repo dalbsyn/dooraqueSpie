@@ -5,21 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .Knopca{
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Это выравнивает по вертикали, если нужно */
+            align-items: center; /* Это выравнивает по горизонтали */
+            height: 100vh;
+            width: 100%;
+        }
+        .Knopca button {
+            font-size: 24px; /* Увеличивает размер шрифта кнопок */
+            padding: 20px 40px; /* Увеличивает размер кнопок за счет внутренних отступов */
+            margin: 20px 0; /* Добавляет пространство между кнопками */
+            border: 2px solid #000;
+        }        
+    </style>
 </head>
 <body>
-    <h1>Введите IP</h1>
-    <input type="text" id="ip" placeholder="Ввод">
-
-    <h1>Логин</h1>
-    <input type="text" id="login" placeholder="Ввод">
-
-    <h1>Пароль</h1>
-    <input type="password" id="password" placeholder="Ввод">
-
-    <button onclick="validateLogin()">ОК</button><br> <!-- перенос строки, чтобы css сюда не впутывать -->
-    <br>
-    <button onclick="Buttom_admin_bw()">Назад</button>
-
-    <p id="error-message" style="color: red; display: none;">Неправильный логин или пароль!</p>
+    <div class = "Knopca">
+        <button onclick="vshod()">Подключиться к сущ</button>
+        <button>Создать новую</button>
+        <button onclick="nazad()">Назад</button>
+    </div>        
 </body>
 </html>
