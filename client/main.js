@@ -1,8 +1,9 @@
-const { app, BrowserWindow, desktopCapturer, session } = require('electron');
+const { app, BrowserWindow, desktopCapturer, session, ipcMain } = require('electron');
 const path = require('node:path')
-
+let mainWindow;
+let popupWindow;
 function createWindow(){
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 800,
     webPreferences: {
@@ -13,6 +14,31 @@ function createWindow(){
   mainWindow.loadFile('index.html'); 
 }
 
+
+function createPopupWindow() {
+  popupWindow = new BrowserWindow({
+      width: 400,
+      height: 300,
+      parent: mainWindow, // Указываем родительское окно
+      modal: true, // Окно будет модальным
+      show: false, // Не показываем сразу
+      webPreferences: {
+          nodeIntegration: true,
+          contextIsolation: false
+      }
+  });
+
+  popupWindow.loadFile('admin/settings.html'); // Загружаем файл для всплывающего окна
+
+  popupWindow.once('ready-to-show', () => {
+      popupWindow.show(); // Показываем окно, когда оно готово
+  });
+
+  // Очистка объекта при закрытии
+  popupWindow.on('closed', () => {
+      popupWindow = null;
+  });
+}
 app.whenReady().then(() => {
   createWindow()
 
@@ -27,6 +53,10 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow()
     }
+  })
+
+  ipcMain.on('open-popup', () => {
+    createPopupWindow();
   })
 })
 

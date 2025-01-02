@@ -77,3 +77,10 @@ function addUser() {
         }
     }
 }
+
+const { ipcRenderer } = require('electron');
+
+// Открываем всплывающее окно по нажатию на кнопку
+document.getElementById('open-settings').addEventListener('click', () => {
+    ipcRenderer.send('open-popup');
+});
